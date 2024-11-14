@@ -106,8 +106,11 @@ class MainActivity : AppCompatActivity() {
                 phoneInput.setEnabled(false)
                 minuteInput.setEnabled(false)
                 val intent = Intent(this, AlarmReceiver::class.java)
-                val message = "${phoneOutput}:${messageOutput}"
-                intent.putExtra("MESSAGE", message)
+                val extras = Bundle().apply {
+                    putString("PHONE", phoneOutput)
+                    putString("MESSAGE", messageOutput)
+                }
+                intent.putExtras(extras)
                 pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
                 alarmManager!!.setRepeating(
                     AlarmManager.RTC,
