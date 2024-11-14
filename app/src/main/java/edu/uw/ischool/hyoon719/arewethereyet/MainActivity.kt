@@ -122,4 +122,9 @@ class MainActivity : AppCompatActivity() {
             isClicked = !isClicked
         }
     }
+    override fun onDestroy() {
+        super.onDestroy()
+        val alarmManager = getSystemService(ALARM_SERVICE) as? AlarmManager
+        alarmManager?.cancel(pendingIntent)
+    }
 }
